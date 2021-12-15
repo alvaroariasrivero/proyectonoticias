@@ -17,8 +17,7 @@ class App extends Component {
       logout: this.logout
     }
   }
-  
-  
+    
   login = (user) => {
     this.setState({user})
   }
