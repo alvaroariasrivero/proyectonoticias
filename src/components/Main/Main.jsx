@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import {Routes, Route} from 'react-router-dom';
-import Home from '../Home'
-import Form from '../Form'
+import Home from '../Home';
+import Form from '../Form';
 import ListNews from '../ListNews'
+import axios from "axios";
 
 class Main extends Component {
 
@@ -12,10 +13,10 @@ class Main extends Component {
     this.state = {
       newsList: [
         {
-          title: "Ataca el hombre vaya",
-          topic: "Desgracia",
-          content: "Vaya hombre vaya",
-          picture: 'http://img.desmotivaciones.es/201101/olioil_1.jpg'
+          title:'',
+          topic:'',
+          content:'',
+          picture:''
         }
       ]
     }
@@ -31,13 +32,29 @@ class Main extends Component {
     this.setState({newsList:news})
   }
 
+  
+  async componentDidMount(){
+    const resp = await axios.get('https://api.nytimes.com/svc/topstories/v2/world.json?api-key=oBciP6bzjII9KOYaKq4ExvlphprXcVGG');
+    const data = await resp.data;
+    const info = {
+      'title': data.results[0].title,
+      'topic': data.results[0].section,
+      'content': data.results[0].abstract,
+      'picture': data.results[0].multimedia[0].url
+    }
+    console.log('Esto es info', info)
+    this.setState({
+      newsList: [info]
+    })
+  }
+
   render() {
     return (
     <main>
       <Routes>
         <Route path='/' element={<Home/>} exact/>
         <Route path='/form' element={<Form createNew={this.createNew}/>}/>
-        <Route path='/list' element={<ListNews newsList={this.state} deleteNew={this.deleteNew}/>}/>
+        <Route path='/list' element={<ListNews newsList={this.state} deleteNew={this.deleteNew} load={this.componentDidMount}/>}/>
       </Routes>
     </main>)
   }
