@@ -3,7 +3,7 @@ import Header from './components/Head'
 import Main from './components/Main'
 import Footer from './components/Footer'
 import { BrowserRouter } from 'react-router-dom';
-import { Component } from 'react/cjs/react.production.min';
+import { Component } from 'react';
 import {userContext} from './context/userContext';
 
 class App extends Component {
