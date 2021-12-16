@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "../Card/Card";
 
+
 class ListNews extends Component {
 
   constructor(props) {
@@ -13,6 +14,7 @@ class ListNews extends Component {
 
   paintNews = () => {
     return this.props.newsList.newsList.map((article,i)=> <Card info={article} delete={()=>this.props.deleteNew(i)} key={i}/>)
+
   }
   
   render() {

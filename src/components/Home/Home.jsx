@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {userContext} from '../../context/userContext';
+import './Home.css'
 
 class Home extends Component {
   static contextType = userContext
@@ -15,7 +16,6 @@ class Home extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const user = event.target.elements.user.value;
-    console.log('Esto es user', user);
     this.setState({user});
     const{login} = this.context;
     login(user)
@@ -23,11 +23,16 @@ class Home extends Component {
   
   render() {
     return (
-    <form onSubmit={this.handleSubmit}>
-      <label htmlFor='user'>Nombre: </label>
-      <input type="text" name='user'/>
-      <input type="submit" />
-    </form>);
+      <div className="user">
+        <form onSubmit={this.handleSubmit}>
+          <div className="name">
+            <label htmlFor='user'>Nombre: </label>
+            <input type="text" name='user'/>
+            <input type="submit" />
+          </div>
+        </form>
+      </div>
+    );
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Navigate } from 'react-router-dom'
+import './Form.css'
 
 class Form extends Component {
   constructor(props) {
@@ -27,8 +28,9 @@ class Form extends Component {
       return <Navigate to='/list'/>;
     }
     
-    return <div>
+    return <div className="create">
             <form onSubmit={this.handleSubmit}>
+              <div className="formu">
                 <label htmlFor="title">Title: </label>
                 <input type="text" name="title" />
                 <label htmlFor="category">Category: </label>
@@ -40,6 +42,7 @@ class Form extends Component {
                 <label htmlFor="date">Date: </label>
                 <input type="date" name="date"/>
                 <input type="submit"/>
+              </div>
             </form>
           </div>;
   }

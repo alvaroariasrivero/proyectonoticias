@@ -22,8 +22,8 @@ class Main extends Component {
     }
   }
   
-  createNew = (title, category, content, picture) => {
-    const newArticle = {title, category, content, picture}
+  createNew = (title, category, content, picture, date) => {
+    const newArticle = {title, category, content, picture, date}
     this.setState({ newsList: [...this.state.newsList, newArticle] })
   }
 
@@ -34,7 +34,7 @@ class Main extends Component {
 
   
   async componentDidMount(){
-    const resp = await axios.get('https://api.nytimes.com/svc/topstories/v2/world.json?api-key=oBciP6bzjII9KOYaKq4ExvlphprXcVGG');
+    const resp = await axios.get(`https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=${process.env.REACT_APP_APIKEY}`);
     const data = resp.data;
 
     const newArray = data.results.map(element => {
