@@ -5,19 +5,19 @@ class Form extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const title = event.target.elements.title.value;
-    const topic = event.target.elements.topic.value;
+    const category = event.target.elements.category.value;
     const content = event.target.elements.content.value;
     const picture = event.target.elements.picture.value;
-    console.log("Estos son los datos del form:", title, topic, content, picture)
-    this.props.createNew(title, topic, content, picture)
+    console.log("Estos son los datos del form:", title, category, content, picture)
+    this.props.createNew(title, category, content, picture)
   }
   render() {
     return <div>
             <form onSubmit={this.handleSubmit}>
                 <label htmlFor="title">Title: </label>
                 <input type="text" name="title" />
-                <label htmlFor="topic">Topic: </label>
-                <input type="text" name="topic" />
+                <label htmlFor="category">Category: </label>
+                <input type="text" name="category" />
                 <label htmlFor="content">Content: </label>
                 <textarea name="content"/>
                 <label htmlFor="picture">Picture: </label>

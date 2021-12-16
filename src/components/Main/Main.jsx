@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import {Routes, Route} from 'react-router-dom';
-import Home from '../Home'
-import Form from '../Form'
-import ListNews from '../ListNews'
+import Home from '../Home';
+import Form from '../Form';
+import ListNews from '../ListNews';
+import axios from "axios";
 
 class Main extends Component {
 
@@ -12,17 +13,17 @@ class Main extends Component {
     this.state = {
       newsList: [
         {
-          title: "Ataca el hombre vaya",
-          topic: "Desgracia",
-          content: "Vaya hombre vaya",
-          picture: 'http://img.desmotivaciones.es/201101/olioil_1.jpg'
+          title:'',
+          category:'',
+          content:'',
+          picture:''
         }
       ]
     }
   }
   
-  createNew = (title, topic, content, picture) => {
-    const newArticle = {title, topic, content, picture}
+  createNew = (title, category, content, picture) => {
+    const newArticle = {title, category, content, picture}
     this.setState({ newsList: [...this.state.newsList, newArticle] })
   }
 
@@ -31,13 +32,42 @@ class Main extends Component {
     this.setState({newsList:news})
   }
 
+  
+  async componentDidMount(){
+    const resp = await axios.get('https://api.nytimes.com/svc/topstories/v2/world.json?api-key=oBciP6bzjII9KOYaKq4ExvlphprXcVGG');
+    const data = resp.data;
+
+    const newArray = data.results.map(element => {
+      return {
+        'title': element.title,
+        'category': element.section,
+        'content': element.abstract,
+        'picture': element.multimedia[0].url
+      }
+    })
+    const info = newArray.slice(0, 5);
+    console.log('Esto es info', info)
+
+
+    // const info = {
+    //   'title': data.results[0].title,
+    //   'topic': data.results[0].section,
+    //   'content': data.results[0].abstract,
+    //   'picture': data.results[0].multimedia[0].url
+    // }
+    // console.log('Esto es info', info)
+    this.setState({
+      newsList: info
+    })
+  }
+
   render() {
     return (
     <main>
       <Routes>
         <Route path='/' element={<Home/>} exact/>
         <Route path='/form' element={<Form createNew={this.createNew}/>}/>
-        <Route path='/list' element={<ListNews newsList={this.state} deleteNew={this.deleteNew}/>}/>
+        <Route path='/list' element={<ListNews newsList={this.state} deleteNew={this.deleteNew} load={this.componentDidMount}/>}/>
       </Routes>
     </main>)
   }
