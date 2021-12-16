@@ -15,8 +15,8 @@ class Form extends Component {
     const category = event.target.elements.category.value;
     const content = event.target.elements.content.value;
     const picture = event.target.elements.picture.value;
-    // console.log("Estos son los datos del form:", title, category, content, picture)
-    this.props.createNew(title, category, content, picture);
+    const date = event.target.elements.date.value;
+    this.props.createNew(title, category, content, picture, date);
     this.setState({ redirect: true });
   }
   render() {
@@ -37,6 +37,8 @@ class Form extends Component {
                 <textarea name="content"/>
                 <label htmlFor="picture">Picture: </label>
                 <input type="url" name="picture" />
+                <label htmlFor="date">Date: </label>
+                <input type="date" name="date"/>
                 <input type="submit"/>
             </form>
           </div>;
