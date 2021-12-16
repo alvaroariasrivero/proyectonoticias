@@ -22,8 +22,8 @@ class Main extends Component {
     }
   }
   
-  createNew = (title, category, content, picture) => {
-    const newArticle = {title, category, content, picture}
+  createNew = (title, category, content, picture, date) => {
+    const newArticle = {title, category, content, picture, date}
     this.setState({ newsList: [...this.state.newsList, newArticle] })
   }
 
@@ -34,7 +34,7 @@ class Main extends Component {
 
   
   async componentDidMount(){
-    const resp = await axios.get('https://api.nytimes.com/svc/topstories/v2/world.json?api-key=oBciP6bzjII9KOYaKq4ExvlphprXcVGG');
+    const resp = await axios.get(`https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=${process.env.REACT_APP_APIKEY}`);
     const data = resp.data;
 
     const newArray = data.results.map(element => {
@@ -42,20 +42,12 @@ class Main extends Component {
         'title': element.title,
         'category': element.section,
         'content': element.abstract,
-        'picture': element.multimedia[0].url
+        'picture': element.multimedia[0].url,
+        'date': element.updated_date.slice(0, 10)
       }
     })
     const info = newArray.slice(0, 5);
-    console.log('Esto es info', info)
 
-
-    // const info = {
-    //   'title': data.results[0].title,
-    //   'topic': data.results[0].section,
-    //   'content': data.results[0].abstract,
-    //   'picture': data.results[0].multimedia[0].url
-    // }
-    // console.log('Esto es info', info)
     this.setState({
       newsList: info
     })
