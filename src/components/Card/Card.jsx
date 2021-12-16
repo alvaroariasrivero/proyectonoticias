@@ -11,10 +11,10 @@ class Card extends Component {
   }  
 
   render() {
-    const {title, topic, content, picture} = this.props.info
+    const {title, category, content, picture} = this.props.info
     return <div>
       <p>{title}</p>
-      <p>{topic}</p>
+      <p>{category}</p>
       <p>{content}</p>
       <img src={picture} alt={title} />
       <button onClick={this.props.delete}>Delete</button>
