@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Navigate } from 'react-router-dom'
 import './Form.css'
+import Button from '@mui/material/Button';
 
 class Form extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class Form extends Component {
                 <input type="url" name="picture" />
                 <label htmlFor="date">Date: </label>
                 <input type="date" name="date"/>
-                <input type="submit"/>
+                <Button variant="contained" type="submit">Post New</Button>
               </div>
             </form>
           </div>;

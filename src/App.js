@@ -5,6 +5,10 @@ import Footer from './components/Footer'
 import { BrowserRouter } from 'react-router-dom';
 import { Component } from 'react';
 import {userContext} from './context/userContext';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 class App extends Component {
 

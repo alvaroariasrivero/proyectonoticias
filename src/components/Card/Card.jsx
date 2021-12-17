@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import './Card.css';
+import Button from '@mui/material/Button';
 
 class Card extends Component {
-
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-       
-    }
-  }  
 
   render() {
     const {title, category, content, picture, date} = this.props.info
@@ -20,7 +13,7 @@ class Card extends Component {
           <p className="content">{content}</p>
           <img src={picture} alt={title} className="picture"/>
           <p className="info">Date: {date}</p>
-          <button onClick={this.props.delete}>Delete</button>
+          <Button variant="contained" onClick={this.props.delete}>Delete</Button>
         </div>
     );
   }
