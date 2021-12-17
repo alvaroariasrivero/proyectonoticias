@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {userContext} from '../../context/userContext';
 import './Home.css'
+import Button from '@mui/material/Button';
 
 class Home extends Component {
   static contextType = userContext
@@ -28,7 +29,7 @@ class Home extends Component {
           <div className="name">
             <label htmlFor='user'>Nombre: </label>
             <input type="text" name='user'/>
-            <input type="submit" />
+            <Button variant="contained" type="submit">Send</Button>
           </div>
         </form>
       </div>
