@@ -38,13 +38,18 @@ class Main extends Component {
     const data = resp.data;
 
     const newArray = data.results.map(element => {
-      return {
-        'title': element.title,
-        'category': element.section,
-        'content': element.abstract,
-        'picture': element.multimedia[0].url,
-        'date': element.updated_date.slice(0, 10)
+      try {
+        return {
+          'title': element.title,
+          'category': element.section,
+          'content': element.abstract,
+          'picture': element.multimedia[0].url,
+          'date': element.updated_date.slice(0, 10)
+        }
+      } catch (error) {
+        console.log("Error", error)
       }
+      
     })
     const info = newArray.slice(0, 5);
 
